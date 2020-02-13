@@ -137,14 +137,11 @@ class Deck:
         None
 
         '''
-        
         for c in self.cards:
             if c.rank == card.rank and c.suit == card.suit:
                 return
 
         self.cards.append(card)
-
-
 
 
 # create the Hand with an initial set of cards
@@ -162,7 +159,14 @@ class Hand:
 
     '''
     def __init__(self, init_cards):
+        #deck = Deck()
+        #d1 = deck[0:5]
+        #self.init_cards = deck
         self.init_cards = []
+        '''for suit in range(2):
+            for rank in range(1,3):
+                card = Card(suit,rank)
+                self.init_cards.append(card)'''
 
 
     def add_card(self, card):
@@ -180,14 +184,10 @@ class Hand:
         None
 
         '''
-        pass
-
-
-    for c in self.cards:
-            if c.rank == card.rank and c.suit == card.suit:
-                return
-
-        self.cards.append(card)
+        if card in self.init_cards:
+            return
+        else:
+            self.init_cards.append(card)
 
 
     def remove_card(self, card):
@@ -203,7 +203,14 @@ class Hand:
         the card, or None if the card was not in the Hand
 
         '''
-        pass
+        #for c in self.init_cards:
+        #    if c.rank != card.rank and c.suit != card.suit:
+        #        return
+        if card not in self.init_cards:
+            return
+        else:
+            return card
+
  
     def draw(self, deck):
         '''draw a card
@@ -220,7 +227,8 @@ class Hand:
         None
 
         '''
-        pass
+        self.init_cards.append(deck.deal_card())
+
 
 if __name__ == "__main__":
     pass
