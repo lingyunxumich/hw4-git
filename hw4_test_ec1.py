@@ -93,34 +93,14 @@ class TestHand(unittest.TestCase):
 
     # Test that a hand is initialized properly.
     def test_1_hand(self):
-        d1 = cards.Deck()
-        hand = cards.Hand(d1)
-        self.assertIsInstance(hand, cards.Hand)
-
-    def test_1_hand2(self):
         list_init = []
         hand = cards.Hand(list_init)
         self.assertIsInstance(hand, cards.Hand)
+        
 
     # Test that add_card( ) and remove_card( ) behave as specified (you can write one test
     # for this, called testAddAndRemove.
     def test_2_testAddAndRemove(self):
-        d1 = cards.Deck()
-        h1 = cards.Hand(d1)
-        len1 = len(h1.init_cards)
-        c1 = cards.Card()
-        if c1 not in d1.cards:
-            h1.add_card(c1)
-            len2 = len(h1.init_cards)
-            self.assertEqual(len2-len1, 1)
-
-            c2 = cards.Card()
-            if c2 in d1.cards:
-                h1.remove_card(c2)
-                len3 = len(h1.init_cards)
-                self.assertEqual(len3-len2, 1)
-
-    def test_2_testAddAndRemove2(self):
         list_init = []
         h1 = cards.Hand(list_init)
         len1 = len(h1.init_cards)
@@ -128,50 +108,46 @@ class TestHand(unittest.TestCase):
         c1 = cards.Card()
         if c1 in list_init:
             h1.add_card(c1)
-            h1.remove_card(c1)
             len2 = len(h1.init_cards)
-            self.assertEqual(len1-len2, 1)
+            self.assertEqual(len1-len2, 0)
+
+            c2 = cards.Card()
+            if c2 in list_init:
+                h1.remove_card(c2)
+                len3 = len(h1.init_cards)
+                self.assertEqual(len3-len1, 1)
+            else:
+                h1.remove_card(c2)
+                len4 = len(h1.init_cards)
+                self.assertEqual(len4-len1, 0)
         else:
             h1.add_card(c1)
-            h1.remove_card(c1)
             len2 = len(h1.init_cards)
-            self.assertEqual(len2-len1, 0)
+            self.assertEqual(len2-len1, 1)
 
-        '''c2 = cards.Card()
-        if c2 in list_init:
-            h1.remove_card(c2)
-            len3 = len(h1.init_cards)
-            self.assertEqual(len2-len1, 0)
-
-        if c2 not in list_init:
-            h1.remove_card(c2)
-            len4 = len(h1.init_cards)
-            self.assertEqual(len2-len1, 0)'''
-
-
-
-
-
-
+            c2 = cards.Card()
+            if c2 in list_init:
+                h1.remove_card(c2)
+                len5 = len(h1.init_cards)
+                self.assertEqual(len5-len1, 0)
+            else:
+                h1.remove_card(c2)
+                len6 = len(h1.init_cards)
+                self.assertEqual(len6-len1, 1)
 
 
     # Test that draw( ) works as specified. Be sure to test side effects as well.
     def test_3_draw(self):
+        list_init = []
+        h1 = cards.Hand(list_init)
+        len_hand_before_draw = len(h1.init_cards)
         d1 = cards.Deck()
-        d2 = cards.Deck()
-        len2 = len(d2.cards)
-        h1 = cards.Hand(d1)
-        len1 = len(h1.init_cards)
-        h1.draw(d2)
-        len3 = len(d2.cards)
-        len4 = len(h1.init_cards)
-        self.assertEqual(len2-len3, 1)
-        self.assertEqual(len4-len1, 1)
-        
-
-
-
-
+        len_deck_before_draw = len(d1.cards)
+        h1.draw(d1)
+        len_hand_after_draw = len(h1.init_cards)
+        len_deck_after_draw = len(d1.cards)
+        self.assertEqual(len_hand_after_draw-len_hand_before_draw, 1)
+        self.assertEqual(len_deck_before_draw-len_deck_after_draw, 1)
 
 
 ############

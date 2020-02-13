@@ -159,15 +159,8 @@ class Hand:
 
     '''
     def __init__(self, init_cards):
-        #deck = Deck()
-        #d1 = deck[0:5]
-        #self.init_cards = deck
         self.init_cards = []
-        '''for suit in range(2):
-            for rank in range(1,3):
-                card = Card(suit,rank)
-                self.init_cards.append(card)'''
-
+        
 
     def add_card(self, card):
         '''add a card
